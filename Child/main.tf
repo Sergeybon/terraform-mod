@@ -1,10 +1,11 @@
 provider "aws" {
-  region = "us-east-2"
-  alias = "east-2"
+  region = var.region1
+  alias = var.alias1
 }
+
 provider "aws" {
-  region = "us-east-1"
-  alias = "east-1"
+  region = var.region2
+  alias = var.alias2
 }
 
 resource "aws_cloudfront_origin_access_identity" "this" {
@@ -13,15 +14,15 @@ resource "aws_cloudfront_origin_access_identity" "this" {
 
 resource "aws_cloudfront_distribution" "this" {
   enabled = true
-  aliases = [local.tfenv.domain_name]
-  price_class = local.tfenv.price_class
-  default_root_object = local.tfenv.default_root_object
+  aliases = [var.domain_name]
+  price_class = var.price_class
+  default_root_object = var.default_root_object
   is_ipv6_enabled = true
   default_cache_behavior {
-    allowed_methods        = local.tfenv.cache.allowed_methods
-    cached_methods         = local.tfenv.cache.cached_methods
-    target_origin_id       =  local.tfenv.origin_id
-    viewer_protocol_policy = local.tfenv.viewer_protocol_policy
+    allowed_methods        = var.allowed_methods
+    cached_methods         = var.cached_methods
+    target_origin_id       =  var.origin_id
+    viewer_protocol_policy = var.viewer_protocol_policy
     compress = true
     forwarded_values {
       query_string = false
@@ -32,7 +33,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
   origin {
     domain_name = aws_s3_bucket.this.bucket_regional_domain_name
-    origin_id   = local.tfenv.origin_id
+    origin_id   = var.origin_id
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
     }
@@ -50,13 +51,13 @@ resource "aws_cloudfront_distribution" "this" {
 }
 
 resource "aws_s3_bucket" "this" {
-  bucket = local.tfenv.bucket_name
+  bucket = var.bucket_name
   request_payer = "BucketOwner"
   tags = {}
   cors_rule {
-    allowed_methods = local.tfenv.cors.allowed_methods
-    allowed_headers = local.tfenv.cors.allowed_headers
-    allowed_origins = local.tfenv.cors.allowed_origins
+    allowed_methods = var.allowed_methods
+    allowed_headers = var.allowed_headers
+    allowed_origins = var.allowed_origins
   }
   server_side_encryption_configuration {
     rule {
@@ -89,7 +90,7 @@ resource "aws_s3_bucket_policy" "this" {
 }
 
 resource "aws_acm_certificate" "this" {
-  domain_name = local.tfenv.domain_name
+  domain_name = var.domain_name
   validation_method = "DNS"
   provider = aws.east-1
 }
