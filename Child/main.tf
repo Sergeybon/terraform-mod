@@ -45,7 +45,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
   viewer_certificate {
     acm_certificate_arn = aws_acm_certificate.this.arn
-    minimum_protocol_version = "TLSv1.2_2019"
+    minimum_protocol_version = var.minimum_protocol_version
     ssl_support_method = "sni-only"
   }
 }
@@ -84,7 +84,7 @@ resource "aws_s3_bucket_policy" "this" {
         Sid       = "1"
       },
     ]
-    Version   = "2008-10-17"
+    Version   = var.Version "2008-10-17"
   }
   )
 }

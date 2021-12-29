@@ -88,3 +88,15 @@ variable "sse_algorithm" {
   type        = string
   default     = "AES256"
 }
+
+variable "minimum_protocol_version" {
+  description = "minimum protocol version"
+  type        = string
+  default     = "TLSv1.2_2019"
+}
+
+variable "Version" {
+  description = "Version"
+  type        = string
+  default     = "2008-10-17"
+}
