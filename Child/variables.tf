@@ -82,3 +82,9 @@ variable "domain_name" {
   type        = string
   default     = " "
 }
+
+variable "sse_algorithm" {
+  description = "sse algorithm"
+  type        = string
+  default     = "AES256"
+}
