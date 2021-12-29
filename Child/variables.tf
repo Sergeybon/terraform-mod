@@ -36,19 +36,19 @@ variable "default_root_object" {
 }
 
 variable "allowed_methods" {
-  description = " "
+  description = "list of allowed methods"
   type        = list (string)
   default     = " "
 }
 
 variable "cached_methods" {
-  description = " "
+  description = "list of cached methods"
   type        = list (string)
   default     = " "
 }
 
 variable "origin_id" {
-  description = " "
+  description = "origin id"
   type        = string
   default     = " "
 }
@@ -60,25 +60,25 @@ variable "viewer_protocol_policy" {
 }
 
 variable "bucket_name" {
-  description = " "
+  description = "AWS S3 bucket name"
   type        = string
   default     = " "
 }
 
 variable "allowed_headers" {
-  description = " "
+  description = "list of allowed headers"
   type        = list (string)
   default     = " "
 }
 
 variable "allowed_origins" {
-  description = " "
+  description = "list of allowed origins"
   type        = list (string)
   default     = " "
 }
 
 variable "domain_name" {
-  description = " "
+  description = "domain name"
   type        = string
   default     = " "
 }
