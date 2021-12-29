@@ -84,7 +84,7 @@ resource "aws_s3_bucket_policy" "this" {
         Sid       = "1"
       },
     ]
-    Version   = var.Version "2008-10-17"
+    Version   = var.version
   }
   )
 }

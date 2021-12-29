@@ -95,7 +95,7 @@ variable "minimum_protocol_version" {
   default     = "TLSv1.2_2019"
 }
 
-variable "Version" {
+variable "version" {
   description = "Version"
   type        = string
   default     = "2008-10-17"
